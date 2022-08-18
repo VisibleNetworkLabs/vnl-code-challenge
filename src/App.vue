@@ -1,47 +1,32 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref, computed } from "vue";
+import Q4 from "./Q4.vue";
+import Q5 from "./Q5.vue";
+const routes = {
+  "/Q4": Q4,
+  "/Q5": Q5,
+};
+const currentPath = ref(window.location.hash);
+
+window.addEventListener("hashchange", () => {
+  currentPath.value = window.location.hash;
+});
+
+const currentView = computed(() => {
+  return routes[currentPath.value.slice(1) || "/"];
+});
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="d-flex flex-column align-items-center">
+    <div class="pb-4">
+      <a href="#/Q4">Q4</a>
+      <span class="px-3" style="font-size: 25px"> | </span>
+      <a href="#/Q5">Q5</a>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <component class="" :is="currentView" />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
