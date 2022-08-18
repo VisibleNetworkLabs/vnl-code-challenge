@@ -6,7 +6,7 @@ class AuthorizationService
     private $db;
     private $userName;
     private $network;
-    private $networkId;
+    private $userId;
     private $loggedOn;
 
     public function __construct()
@@ -15,7 +15,7 @@ class AuthorizationService
 
         $_SESSION['logged_on'] = 'test@test.com';
         $_SESSION['timeout'] = time();
-        $_SESSION['network_id'] = 1;
+        $_SESSION['user_id'] = 1;
         $_SESSION['session_id'] = session_id();
 
         session_commit();
@@ -41,7 +41,7 @@ class AuthorizationService
         $this->userName = $_SESSION['logged_on'];
         if(isset($this->userName) && ($_SESSION['timeout'] + $_SERVER['LOGIN_TIMEOUT'] > time())) {
             $this->loggedOn = true;
-            $this->networkId = $_SESSION['network_id'];
+            $this->userId = $_SESSION['user_id'];
             $_SESSION['timeout'] = time();
             session_write_close();
             return true;
@@ -54,11 +54,11 @@ class AuthorizationService
 
     public function getCurrentNetwork()
     {
-        if (!$this->loggedOn || !isset($this->networkId))
+        if (!$this->loggedOn || !isset($this->userId))
             throw new UnauthorizedError("No user logged in trying to load network");
 
         if (!isset($this->network)) {
-            $this->network = $this->db->getNetwork($this->networkId);
+            $this->network = $this->db->getNetwork($this->userId);
             if (!$this->network) {
                 throw new UnauthorizedError();
             }

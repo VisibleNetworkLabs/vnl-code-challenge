@@ -9,13 +9,10 @@ class dbfunctions
         $this->conn = $db->connect();
     }
 
-    public function getNetwork($network_id)
+    public function getNetwork($userId)
     {
-/* SELECT n.* FROM NETWORK n, USERS u WHERE */ 
-/*  up.platform_id = $platformUserId AND */ 
-/*  n.owner_id = u.user_id; */
-        $stmt = $this->conn->prepare("SELECT * FROM network WHERE network_id = ?");
-        $stmt->bind_param("i", $network_id);
+        $stmt = $this->conn->prepare("SELECT n.*, u.username, u.email FROM `NETWORK-test` n INNER JOIN `USER-test` u ON n.owner_id = u.user_id;");
+        $stmt->bind_param("i", $userId);
         $result = $stmt->execute();
 
         if ($result) {
@@ -27,6 +24,11 @@ class dbfunctions
         }
     }
 
+}
+{
+    network: {
+    ....allFields
+}
 }
 
 class dbconnect {

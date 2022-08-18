@@ -16,7 +16,6 @@ const orderedStats = computed(() => {
     });
 });
 const icon = computed(() => {
-  console.log(orderedStats.value);
   switch (orderedStats.value[0][0]) {
     case "Attack":
       return "/src/assets/attack.svg";
