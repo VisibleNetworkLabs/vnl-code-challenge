@@ -11,7 +11,7 @@ class dbfunctions
 
     public function getNetwork($userId)
     {
-        $stmt = $this->conn->prepare("SELECT n.*, u.username, u.email FROM `NETWORK-test` n INNER JOIN `USER-test` u ON n.owner_id = u.user_id;");
+        $stmt = $this->conn->prepare("SELECT n.*, u.username, u.email FROM `NETWORK` n INNER JOIN `USER` u ON n.owner_id = u.user_id;");
         $stmt->bind_param("i", $userId);
         $result = $stmt->execute();
 
