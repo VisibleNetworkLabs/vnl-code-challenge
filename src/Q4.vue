@@ -37,3 +37,5 @@ const players = [
 
 <style scoped>
 </style>
+
+<!-- can use any drawing tool sketch.io or pen and paper are defaults -->

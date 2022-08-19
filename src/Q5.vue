@@ -1,74 +1,74 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
-import NetworkTable from './components/NetworkTable.vue'
+import NetworkTable from "./components/NetworkTable.vue";
 
 const fields = [
   {
     key: "network_id",
-    value: "Network ID"
+    value: "Network ID",
   },
   {
     key: "score_average",
-    value: "Score Average"
+    value: "Score Average",
   },
   {
     key: "owner_id",
-    value: "Owner ID"
+    value: "Owner ID",
   },
   {
     key: "network_name",
-    value: "Network Name"
+    value: "Network Name",
   },
   {
     key: "username",
-    value: "Username"
+    value: "Username",
   },
   {
     key: "email",
-    value: "Email"
+    value: "Email",
   },
 ];
 
-const getNetwork = () => fetch('/phpEndpoint/endpoint-Q5/php-endpoint.php')
-  .then(resp => resp.json())
-  .then(data => network.value = data)
-  
+const getNetwork = () =>
+  fetch("/phpEndpoint/endpoint-Q5/php-endpoint.php")
+    .then((resp) => resp.json())
+    .then((data) => (network.value = data));
+
 const network = ref({});
 
-const averageScores = (score1, score2, score3) => {
-  return Math.round((parseInt(score1) + parseInt(score2) + parseInt(score3)) / 3).toFixed(2);
+const calculationFunction = (a, b, c) => {
+  return Math.round((parseInt(a) + parseInt(b) + parseInt(c)) / 3).toFixed(2);
 };
 
 const items = computed(() => {
   return {
-    "network_id": network.value.network["network_id"],
-    "score_average": averageScores(
-      network.value.network["score1"], 
-      network.value.network["score2"], 
+    network_id: network.value.network["network_id"],
+    score_average: calculationFunction(
+      network.value.network["score1"],
+      network.value.network["score2"],
       network.value.network["score3"]
     ),
-    "owner_id": network.value.network["owner_id"],
-    "network_name": network.value.network["network_name"],
-    "username": network.value.network["username"],
-    "email": network.value.network["email"],
-  }
-})
+    owner_id: network.value.network["owner_id"],
+    network_name: network.value.network["network_name"],
+    username: network.value.network["username"],
+    email: network.value.network["email"],
+  };
+});
 
 onMounted(async () => {
   await getNetwork();
 });
-
 </script>
 
 <template>
-    <div class="container-fluid">
-      <NetworkTable
-        v-if="network !== undefined"
-        :title="network.network ? network.network.network_name : 'error'"
-        :fields="fields" 
-        :items="items" 
-      />
-    </div>
+  <div class="container-fluid">
+    <NetworkTable
+      v-if="network !== undefined"
+      :title="network.network ? network.network.network_name : 'error'"
+      :fields="fields"
+      :items="items"
+    />
+  </div>
 </template>
 
 <style scoped>

@@ -25,11 +25,6 @@ class dbfunctions
     }
 
 }
-{
-    network: {
-    ....allFields
-}
-}
 
 class dbconnect {
     // Connecting to database

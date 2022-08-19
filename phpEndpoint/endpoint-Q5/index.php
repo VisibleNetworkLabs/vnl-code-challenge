@@ -9,3 +9,6 @@ $network = $auth->getCurrentNetwork();
 
 echo json_encode($network);
 ?>
+
+
+/* Answer under here */

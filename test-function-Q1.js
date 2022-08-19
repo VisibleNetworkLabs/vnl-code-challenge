@@ -3,7 +3,7 @@ const function1 = (a, b) => {
     return a + b
 }
 
-console.log(function1(1, 2))
-console.log(function1('hot', 'dog'))
-console.log(function1(1, '2'))
-console.log(function1([1, 2], [3, 4]))
+function1(1, 2) // answer here
+function1('hot', 'dog') //
+function1(1, '2') // 
+function1([1, 2], [3, 4]) //

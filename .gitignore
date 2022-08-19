@@ -18,4 +18,3 @@ bin-release/
 # information for Eclipse / Flash Builder.
 tags
 node_modules
-phpEndpoint/endpoint-Q5/schema.js

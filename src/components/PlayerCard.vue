@@ -18,11 +18,11 @@ const orderedStats = computed(() => {
 const icon = computed(() => {
   switch (orderedStats.value[0][0]) {
     case "Attack":
-      return "/src/assets/attack.svg";
+      return "/src/assets/sword.svg";
     case "Defence":
-      return "/src/assets/defence.svg";
+      return "/src/assets/shield.svg";
     case "Speed":
-      return "/src/assets/speed.svg";
+      return "/src/assets/boot.svg";
   }
 });
 </script>
