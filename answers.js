@@ -28,7 +28,6 @@ const Q3answer = {
 
 // Q5 endpoint return example
 const endpointReturn = {
-  "network": {
     "network_id": 1,
     "score1": 1,
     "score2": 2,
@@ -37,5 +36,4 @@ const endpointReturn = {
     "network_name": "VNL Network",
     "username": "Test User",
     "email": "test@email.com"
-  }
 }
